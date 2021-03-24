@@ -1,5 +1,10 @@
 # azureml_distributed-pytorch-with-distributeddataparallel
 distributed-pytorch-with-distributeddataparallel
 
-forked from https://github.com/Azure/MachineLearningNotebooks  
-based on https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/ml-frameworks/pytorch/distributed-pytorch-with-distributeddataparallel/distributed-pytorch-with-distributeddataparallel.ipynb
+forked from https://github.com/Azure/MachineLearningNotebooks
+
+### 参考ノートブック
+- モデル学習部分
+https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/ml-frameworks/pytorch/distributed-pytorch-with-distributeddataparallel/distributed-pytorch-with-distributeddataparallel.ipynb
+- モデルデプロイ部分
+https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/ml-frameworks/pytorch/train-hyperparameter-tune-deploy-with-pytorch/train-hyperparameter-tune-deploy-with-pytorch.
