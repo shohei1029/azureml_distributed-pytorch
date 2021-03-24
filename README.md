@@ -1,7 +1,6 @@
 # azureml_distributed-pytorch-with-distributeddataparallel
 distributed-pytorch-with-distributeddataparallel
 
-forked from https://github.com/Azure/MachineLearningNotebooks
 
 ### 参考ノートブック
 - モデル学習部分
