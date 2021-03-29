@@ -1,0 +1,13 @@
+name: azuremlnb_env
+channels:
+  - defaults
+  - anaconda
+  - conda-forge
+dependencies:
+  - python=3.6
+  - pip
+  - notebook
+  - ipykernel
+  - pip:
+      - azureml-sdk
+      - azureml-widgets
