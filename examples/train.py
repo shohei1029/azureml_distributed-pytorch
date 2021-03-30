@@ -40,7 +40,8 @@ class Net(nn.Module):
         return x
 
 
-def train(train_loader, model, criterion, optimizer, epoch, device, print_freq, rank):
+def train(train_loader, model, criterion, optimizer, epoch, device, print_freq,
+          rank):
     running_loss = 0.0
     for i, data in enumerate(train_loader, 0):
         # get the inputs; data is a list of [inputs, labels]
@@ -58,10 +59,8 @@ def train(train_loader, model, criterion, optimizer, epoch, device, print_freq, 
         # print statistics
         running_loss += loss.item()
         if i % print_freq == 0:  # print every print_freq mini-batches
-            print(
-                "Rank %d: [%d, %5d] loss: %.3f"
-                % (rank, epoch + 1, i + 1, running_loss / print_freq)
-            )
+            print("Rank %d: [%d, %5d] loss: %.3f" %
+                  (rank, epoch + 1, i + 1, running_loss / print_freq))
             running_loss = 0.0
 
 
@@ -99,17 +98,13 @@ def evaluate(test_loader, model, device):
                 class_total[label] += 1
 
     # print total test set accuracy
-    print(
-        "Accuracy of the network on the 10000 test images: %d %%"
-        % (100 * correct / total)
-    )
+    print("Accuracy of the network on the 10000 test images: %d %%" %
+          (100 * correct / total))
 
     # print test accuracy for each of the classes
     for i in range(10):
-        print(
-            "Accuracy of %5s : %2d %%"
-            % (classes[i], 100 * class_correct[i] / class_total[i])
-        )
+        print("Accuracy of %5s : %2d %%" %
+              (classes[i], 100 * class_correct[i] / class_total[i]))
 
 
 def main(args):
@@ -131,16 +126,19 @@ def main(args):
         torch.distributed.init_process_group(backend="nccl")
 
     # define train and test dataset DataLoaders
-    transform = transforms.Compose(
-        [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
-    )
+    transform = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+    ])
 
-    train_set = torchvision.datasets.CIFAR10(
-        root=args.data_dir, train=True, download=False, transform=transform
-    )
+    train_set = torchvision.datasets.CIFAR10(root=args.data_dir,
+                                             train=True,
+                                             download=False,
+                                             transform=transform)
 
     if distributed:
-        train_sampler = torch.utils.data.distributed.DistributedSampler(train_set)
+        train_sampler = torch.utils.data.distributed.DistributedSampler(
+            train_set)
     else:
         train_sampler = None
 
@@ -152,26 +150,28 @@ def main(args):
         sampler=train_sampler,
     )
 
-    test_set = torchvision.datasets.CIFAR10(
-        root=args.data_dir, train=False, download=False, transform=transform
-    )
-    test_loader = torch.utils.data.DataLoader(
-        test_set, batch_size=args.batch_size, shuffle=False, num_workers=args.workers
-    )
+    test_set = torchvision.datasets.CIFAR10(root=args.data_dir,
+                                            train=False,
+                                            download=False,
+                                            transform=transform)
+    test_loader = torch.utils.data.DataLoader(test_set,
+                                              batch_size=args.batch_size,
+                                              shuffle=False,
+                                              num_workers=args.workers)
 
     model = Net().to(device)
 
     # wrap model with DDP
     if distributed:
-        model = nn.parallel.DistributedDataParallel(
-            model, device_ids=[local_rank], output_device=local_rank
-        )
+        model = nn.parallel.DistributedDataParallel(model,
+                                                    device_ids=[local_rank],
+                                                    output_device=local_rank)
 
     # define loss function and optimizer
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(
-        model.parameters(), lr=args.learning_rate, momentum=args.momentum
-    )
+    optimizer = optim.SGD(model.parameters(),
+                          lr=args.learning_rate,
+                          momentum=args.momentum)
 
     # train the model
     for epoch in range(args.epochs):
@@ -195,7 +195,8 @@ def main(args):
     if not distributed or rank == 0:
         os.makedirs(args.output_dir, exist_ok=True)
         model_path = os.path.join(args.output_dir, "cifar_net.pt")
-        torch.save(model.state_dict(), model_path)
+        torch.save(model.module.state_dict(), model_path)
+        # torch.save(model.state_dict(), model_path)
 
         # evaluate on full test dataset
         evaluate(test_loader, model, device)
@@ -204,10 +205,13 @@ def main(args):
 if __name__ == "__main__":
     # setup argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--data-dir", type=str, help="directory containing CIFAR-10 dataset"
-    )
-    parser.add_argument("--epochs", default=10, type=int, help="number of epochs")
+    parser.add_argument("--data-dir",
+                        type=str,
+                        help="directory containing CIFAR-10 dataset")
+    parser.add_argument("--epochs",
+                        default=10,
+                        type=int,
+                        help="number of epochs")
     parser.add_argument(
         "--batch-size",
         default=16,
@@ -220,13 +224,15 @@ if __name__ == "__main__":
         type=int,
         help="number of data loading workers for each gpu/process",
     )
-    parser.add_argument(
-        "--learning-rate", default=0.001, type=float, help="learning rate"
-    )
+    parser.add_argument("--learning-rate",
+                        default=0.001,
+                        type=float,
+                        help="learning rate")
     parser.add_argument("--momentum", default=0.9, type=float, help="momentum")
-    parser.add_argument(
-        "--output-dir", default="outputs", type=str, help="directory to save model to"
-    )
+    parser.add_argument("--output-dir",
+                        default="outputs",
+                        type=str,
+                        help="directory to save model to")
     parser.add_argument(
         "--print-freq",
         default=200,
