@@ -28,6 +28,7 @@ class Net(nn.Module):
         x = self.fc3(x)
         return x
 
+
 def init():
     global model
     # AZUREML_MODEL_DIR is an environment variable created during deployment.
@@ -35,9 +36,9 @@ def init():
     # For multiple models, it points to the folder containing all deployed models (./azureml-models)
     model_path = os.path.join(os.getenv('AZUREML_MODEL_DIR'), 'cifar_net.pt')
     # model = torch.load(model_path, map_location=lambda storage, loc: storage)
+    model = Net()    
     model.load_state_dict(torch.load(model_path,map_location=torch.device('cpu')))
     model.eval()
-
 
 def run(input_data):
     input_data = torch.tensor(json.loads(input_data)['data'])
