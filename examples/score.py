@@ -1,9 +1,9 @@
 import os
+import json
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torchvision import transforms
-import json
 
 from azureml.core.model import Model
 
@@ -35,7 +35,6 @@ def init():
     # It is the path to the model folder (./azureml-models/$MODEL_NAME/$VERSION)
     # For multiple models, it points to the folder containing all deployed models (./azureml-models)
     model_path = os.path.join(os.getenv('AZUREML_MODEL_DIR'), 'cifar_net.pt')
-    # model = torch.load(model_path, map_location=lambda storage, loc: storage)
     model = Net()    
     model.load_state_dict(torch.load(model_path,map_location=torch.device('cpu')))
     model.eval()
@@ -50,7 +49,14 @@ def run(input_data):
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
         softmax = nn.Softmax(dim=1)
         pred_probs = softmax(output).numpy()[0]
-        index = torch.argmax(output, 1)
+
+        print("outputです：", output) # output中身確認. n x 10 の行列(リスト入れ子)型tensor
+
+        index = torch.argmax(output, 1) # 元コードで使われていたもの。dim=1がついている
+        print("indexです：", index) # 81要素のリスト型tensor
+
+        # index = torch.argmax(output) # dim=1を消したものに置き換えてみた
+        # print("indexです：", index) #要素1個。
 
     result = {"label": classes[index], "probability": str(pred_probs[index])}
     return result
