@@ -2,6 +2,8 @@
 
 本コンテンツは、ローカルの Visual Studio Code (VSCode) 上から Azure Machine Learning を使用して PyTorch モデルの分散深層学習を行うハンズオンコンテンツです。
 
+![](./environment_image.png)
+
 ## 前提条件
 本ハンズオンコンテンツでは下記環境を前提としています。
 - [Anaconda](https://www.anaconda.com/products/individual)
