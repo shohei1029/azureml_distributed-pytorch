@@ -2,6 +2,6 @@
 .vscode
 examples/config.json
 examples/pytorch-distr
-examples/cifar-10
+examples/cifar-10/cifar-10-batches-py
 examples/cifar-10-python.tar.gz
 *Zone.Identifier
