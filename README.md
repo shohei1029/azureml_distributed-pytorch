@@ -15,6 +15,15 @@
 - [VSCode Python 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
 - [VSCode Jupyter 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter)
 - [Azure Machine Learning ワークスペース作成](https://docs.microsoft.com/ja-jp/azure/machine-learning/how-to-manage-workspace?tabs=azure-portal)
+- GPUインスタンスのクォーターが十分存在すること
+    - 手順
+        - [リージョンごとにクォータの引き上げを要求する](https://docs.microsoft.com/ja-jp/azure/azure-portal/supportability/regional-quota-requests#request-a-quota-increase-by-region-from-help--support)
+    - 申請内容
+        - クォータの種類：Machine Learning サービス
+        - 場所：(Azure MLワークスペースと同一リージョン)
+        - VMシリーズ：NC Series (又はNCSv3 Series等)
+        - 新しい vCPU の制限：最低12以上
+
 
 ## 実行手順
 ### 環境準備
