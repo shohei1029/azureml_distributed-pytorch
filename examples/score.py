@@ -10,7 +10,7 @@ from azureml.core.model import Model
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
-        self.conv1 = nn.Conv2d(3, 32, 3)
+        self.conv1 = nn.Conv2d(3, 32, 3) # in_channels, out_channels, kernel_size, 
         self.pool = nn.MaxPool2d(2, 2)
         self.conv2 = nn.Conv2d(32, 64, 3)
         self.conv3 = nn.Conv2d(64, 128, 3)
@@ -44,19 +44,13 @@ def run(input_data):
 
     # get prediction
     with torch.no_grad():
-        output = model(input_data)
+        input_data = input_data.unsqueeze(0) # add batch dimension
+        output = model(input_data) 
         classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
         softmax = nn.Softmax(dim=1)
         pred_probs = softmax(output).numpy()[0]
-
-        print("outputです：", output) # output中身確認. n x 10 の行列(リスト入れ子)型tensor
-
-        index = torch.argmax(output, 1) # 元コードで使われていたもの。dim=1がついている
-        print("indexです：", index) # 81要素のリスト型tensor
-
-        # index = torch.argmax(output) # dim=1を消したものに置き換えてみた
-        # print("indexです：", index) #要素1個。
+        index = torch.argmax(output, 1) 
 
     result = {"label": classes[index], "probability": str(pred_probs[index])}
     return result

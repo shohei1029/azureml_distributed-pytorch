@@ -25,8 +25,9 @@
 
 ## 参考情報
 - [VSCode の Azure ML 拡張機能チュートリアル](https://docs.microsoft.com/ja-jp/azure/machine-learning/tutorial-setup-vscode-extension)
-- 本コンテンツで分散学習を行うために使用している PyTorch の DistributedDataParallel 機能ではなく、Horovod を使用した分散深層学習を行うサンプルノードブック
+- Horovod を使用した分散深層学習を行うサンプルノードブック
 [Distributed PyTorch with Horovod](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/ml-frameworks/pytorch/distributed-pytorch-with-horovod/distributed-pytorch-with-horovod.ipynb)
+    ※本コンテンツでは分散学習を行うためにPyTorch の DistributedDataParallel 機能を使用している。
 
 ### 関連ノートブック
 - モデル学習部分の
