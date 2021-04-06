@@ -44,6 +44,9 @@
 - Horovod を使用した分散深層学習を行うサンプルノードブック
 [Distributed PyTorch with Horovod](https://github.com/Azure/MachineLearningNotebooks/blob/master/how-to-use-azureml/ml-frameworks/pytorch/distributed-pytorch-with-horovod/distributed-pytorch-with-horovod.ipynb)
     ※本コンテンツでは分散学習を行うためにPyTorch の DistributedDataParallel 機能を使用しています。
+- [Azure Machine Learningのサンプルノートブック集 (英語)](https://github.com/Azure/MachineLearningNotebooks)
+    PyTorch以外のライブラリを使用した場合を含め、様々なシナリオについてのサンプルノートブックがまとめられています。
+- [Machine Learng Practices and Tips](https://azure.github.io/machine-learning-best-practices/#/)
 
 ### 関連ノートブック
 - モデル学習部分の
