@@ -13,12 +13,13 @@
 
 ## 前提条件
 本ハンズオンコンテンツでは下記環境を前提としています。
-- [Anaconda](https://www.anaconda.com/products/individual)
+- [Anaconda](https://www.anaconda.com/products/individual)  
     Python本体に加え、科学計算やデータ分析に使えるライブラリ群、仮想環境作成機能が提供されているパッケージ
-- [Visual Studio Code (VSCode)](https://azure.microsoft.com/ja-jp/products/visual-studio-code/)
-- [VSCode Python 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+- [Visual Studio Code (VSCode)](https://azure.microsoft.com/ja-jp/products/visual-studio-code/)  
+    様々なOSで動作する、機能性と拡張性に優れたオープンソースのプログラミングエディタ
+- [VSCode Python 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-python.python)  
     VSCodeでPythonのコード補完、デバッグ、コード整形、テスト等々を可能にする拡張機能
-- [VSCode Jupyter 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter)
+- [VSCode Jupyter 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter)  
     VSCodeでJupyter notebookをサポートする拡張機能。(Python以外の言語でも利用可能)
 - [Azure Machine Learning ワークスペース作成](https://docs.microsoft.com/ja-jp/azure/machine-learning/how-to-manage-workspace?tabs=azure-portal)
 - GPUインスタンスのクォーターが十分存在すること
@@ -32,6 +33,8 @@
 
 
 ## 実行手順
+本リポジトリを`git clone`するか、ZIPファイルとしてダウンロードしてご利用ください。
+
 ### 環境準備
 `./setup.ipnb`を実行します。
 
