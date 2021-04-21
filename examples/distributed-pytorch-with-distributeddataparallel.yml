@@ -1,6 +1,6 @@
 name: distributed-pytorch-with-distributeddataparallel
 dependencies:
-  - python=3.6
+  - python=3.8
   - pip
   - notebook
   - ipykernel
