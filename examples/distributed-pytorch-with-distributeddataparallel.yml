@@ -5,9 +5,10 @@ dependencies:
   - notebook
   - ipykernel
   - pip:
-      - azureml-sdk
-      - azureml-widgets
-      - torch
-      - torchvision
+      - azureml-sdk==1.26.0
+      - azureml-widgets==1.26.0
+      - azureml-dataprep
+      - torch==1.6.0
+      - torchvision==0.7.0
       - matplotlib
       - pillow
